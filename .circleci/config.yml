@@ -1,5 +1,4 @@
 version: 2.1
-setup: true
 
 parameters:
   api_jobs_tags:
@@ -11,47 +10,51 @@ parameters:
     description: Trigger job steps if tag matches, otherwise skip steps
     type: string
     
-orbs:
-  continuation: circleci/continuation@0.2.0
-  
 jobs:
   api_job_1:
     docker:
       - image: cimg/base:stable
-    when:
-      condition:
-        matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
-      steps:
-        - checkout
-        - run: echo "Hellow World from api_job_1"
+    steps:
+      - checkout
+      - when:
+          condition:
+            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
+          steps:
+            - run: echo "Hellow World from api_job_1"
   api_job_2:
     docker:
       - image: cimg/base:stable
-    when:
-      condition:
-        matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
-      steps:
-        - checkout
-        - run: echo "Hellow World from api_job_2"
+    steps:
+      - checkout
+      - when: 
+          condition:
+            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
+          steps:
+            - checkout
+            - run: echo "Hellow World from api_job_2"
         
   ui_job_1:
     docker:
       - image: cimg/base:stable
-    when:
-      condition:
-        matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
-      steps:
-        - checkout
-        - run: echo "Hellow World from ui_job_1"
+    steps:
+      - checkout
+      - when:
+          condition:
+            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
+          steps:
+            - checkout
+            - run: echo "Hellow World from ui_job_1"
   ui_job_2:
     docker:
       - image: cimg/base:stable
-    when:
-      condition:
-        matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
-      steps:
-        - checkout
-        - run: echo "Hellow World from ui_job_2"
+    steps:
+      - checkout
+      - when:
+          condition:
+            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
+          steps:
+            - checkout
+            - run: echo "Hellow World from ui_job_2"
 workflows:
   test-workflow:
     jobs:
