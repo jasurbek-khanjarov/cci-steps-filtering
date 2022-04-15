@@ -61,6 +61,9 @@ jobs:
             - run: echo "Hellow World from ui_job_2"
 workflows:
   test-workflow:
+    when:
+      condition:
+        matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
     jobs:
       - api_job_1
       - api_job_2
