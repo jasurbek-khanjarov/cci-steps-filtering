@@ -14,6 +14,7 @@ jobs:
   api_job_1:
     docker:
       - image: cimg/base:stable
+    resource_class: small
     steps:
       - checkout
       - when:
@@ -24,6 +25,7 @@ jobs:
   api_job_2:
     docker:
       - image: cimg/base:stable
+    resource_class: small
     steps:
       - checkout
       - when: 
@@ -36,6 +38,7 @@ jobs:
   ui_job_1:
     docker:
       - image: cimg/base:stable
+    resource_class: small
     steps:
       - checkout
       - when:
@@ -47,6 +50,7 @@ jobs:
   ui_job_2:
     docker:
       - image: cimg/base:stable
+    resource_class: small
     steps:
       - checkout
       - when:
