@@ -19,7 +19,7 @@ jobs:
       - checkout
       - when:
           condition:
-            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
+            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.branch >> }
           steps:
             - run: echo "Hellow World from api_job_1"
   api_job_2:
@@ -30,7 +30,7 @@ jobs:
       - checkout
       - when: 
           condition:
-            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
+            matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.branch >> }
           steps:
             - checkout
             - run: echo "Hellow World from api_job_2"
@@ -43,7 +43,7 @@ jobs:
       - checkout
       - when:
           condition:
-            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
+            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.branch >> }
           steps:
             - checkout
             - run: echo "Hellow World from ui_job_1"
@@ -55,15 +55,12 @@ jobs:
       - checkout
       - when:
           condition:
-            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.tag >> }
+            matches: { pattern: <<pipeline.parameters.ui_jobs_tags>>, value: << pipeline.git.branch >> }
           steps:
             - checkout
             - run: echo "Hellow World from ui_job_2"
 workflows:
   test-workflow:
-    when:
-      condition:
-        matches: { pattern: <<pipeline.parameters.api_jobs_tags>>, value: << pipeline.git.tag >> }
     jobs:
       - api_job_1
       - api_job_2
